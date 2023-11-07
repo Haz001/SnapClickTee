@@ -19,3 +19,4 @@ def index():
     except TemplateNotFound:
         print("404")
         # return render_template('home/page-404.html'), 404
+
