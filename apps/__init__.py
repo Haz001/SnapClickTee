@@ -10,3 +10,4 @@ app = Flask(__name__)
 
 # Import routing to render the pages
 from apps import views
+from apps import ai

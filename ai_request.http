@@ -1,20 +1,24 @@
-POST http://localhost:80/api/item
+GET http://localhost:5000/
+
+###
+
+POST http://localhost:5000/ai/merge
 Content-Type: application/json
 
 [
   {
     "type": "image",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Bruce_McCandless_II_during_EVA_in_1984.jpg/1024px-Bruce_McCandless_II_during_EVA_in_1984.jpg",
+    "url": "https://demo.70e9f1a0f18a49a29a0cd16c9e0750df.lambdaspaces.com/file=/home/demo/source/gainsborough.jpeg",
     "strength": 3.2
   },
   {
     "type": "image",
-    "url": "https://lambdalabs-image-mixer-demo.hf.space/file=/home/user/app/ex2-3.jpeg",
+    "url": "https://demo.70e9f1a0f18a49a29a0cd16c9e0750df.lambdaspaces.com/file=/home/demo/source/blonder.jpeg",
     "strength": 3
   },
   {
     "type": "text",
-    "prompt": "colourful, astronaut with top hat",
+    "prompt": "central symmetric figure detailed artwork",
     "strength": 2
   },
   {
@@ -23,7 +27,7 @@ Content-Type: application/json
 ]
 
 ###
-POST http://localhost:80/api/item
+POST http://localhost:5000/api/item
 Content-Type: application/x-www-form-urlencoded
 Host: localhost
 User-Agent: HTTPie

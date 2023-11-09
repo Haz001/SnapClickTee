@@ -176,8 +176,9 @@ def api_image_merge():
                 slots.append(t_slot)
     slots = slot_limit(slots)
 
-    result = ''
-    for s in slots:
-        result += str(s)
+    img = image_merge(*slots)
 
-    return result
+    response = app.make_response(img.getvalue())
+    response.headers['content-type'] = 'image/png'
+
+    return response
