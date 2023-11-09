@@ -7,18 +7,36 @@
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
+  <div class="header">
+    <a href="#default" >
+        <img src="static/image/logo.png" height="50px" width="50px" alt="site’s logo">
+    </a>
 
-        <input type="color" id="color_picker" value="#df1aae">
-        <img src="apps/static/img/arthur-ogleznev-1wSVA2oEVOI-unsplash.jpg" id="logo" style="width: 300px; height: 300px;"/>
-        <a id="buy_button" class="btn align-right" href="#">Buy Now</a>
+    <div class="header-right">
+      <a href="#Ai Merge">Ai Merge</a>
+      <a href="#Ai Generation">Ai Generation</a>
+      <a class="active" href="index.html">Image Editor</a>
+      <a href="#Image Bank">Image Bank</a>
+    </div>
+  </div>
 
+  <div class="content-container">
+    <div class="image-and-drawing">
+        <img src="apps/static/img/arthur-ogleznev-1wSVA2oEVOI-unsplash.jpg" id="logo" style="width: 300px; height: 300px;" alt="site’s logo">
         <div class="canvas-container">
-        <canvas id="drawing_canvas"></canvas>
-        <div class="initial-message" id="initial_message">
-          <p><b>Draw</b> &#x270E; </p>
+          <h3> Draw your own design! </h3>
+            <canvas id="drawing_canvas"></canvas>
+            <div class="initial-message" id="initial_message">
+                <p><b>Draw</b> &#x270E; </p>
+            </div>
         </div>
-      </div>
-
+    </div>
+    <div class="action-buttons">
+        <input type="color" id="color_picker" value="#df1aae">
+        <a id="buy_button" class="btn" href="#">Buy Now</a>
+        <a id="save_button" class="btn" href="#">Save graphic</a>
+    </div>
+  </div>
 </body>
 </html>
 
