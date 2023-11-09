@@ -7,7 +7,7 @@ from io import BytesIO
 import json
 import requests
 
-from flask import request
+from flask import request, send_file
 
 from apps import app
 
@@ -156,7 +156,7 @@ def api_image_merge():
         error = 'Form data error'
         # noinspection PyTypeChecker
         data: dict[str, str] = request.form
-        for i in range(len(5)):
+        for i in range(5):
             t_slot: Slot = Slot()
             if f'input{i}' in data:
                 type = data[f'input{i}'].lower()
@@ -178,7 +178,4 @@ def api_image_merge():
 
     img = image_merge(*slots)
 
-    response = app.make_response(img.getvalue())
-    response.headers['content-type'] = 'image/png'
-
-    return response
+    return send_file(img, mimetype="image/png")

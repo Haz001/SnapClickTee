@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="static/css/styles.css">
+    </head>
+    <body>
+
+        <form action="http://localhost:5000/ai/" method="post">
+            <span>Slot 1<br></span>
+            <label for="input1">Type</label><br />
+            <input checked="checked" name="input1" type="radio" value="nothing" /> Nothing <br />
+            <input name="input1" type="radio" value="image" /> Image URL <br />
+            <input name="input1" type="radio" value="text" /> Prompt <br />
+            <br>
+            <label for="string1">URL/Prompt</label>
+            <input name="string1" type="text"/>
+            <input type="number" min="0" max="5" step="0.5" name="strength"/>
+        </form>
+    </body>
+</html>
