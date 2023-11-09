@@ -1,75 +1,153 @@
 body {
-    margin: 0;
-    font-family: sans-serif;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.canvas-container {
+  position: relative;
+  height: calc(80vh - 55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.initial-message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.hidden {
+  display: none;
+}
+
+canvas {
+  box-shadow: 0 0 4px;
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header .class header-logo {
+  text-align: center;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: rgb(102, 177, 73);
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+      float: none;
+      display: block;
+      text-align: left;
   }
   
-  .canvas-container {
-    position: relative;
-    height: calc(100vh - 55px);
+  .header-right {
+      float: none;
   }
-  
-  .initial-message {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  canvas {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    max-width: 90%;
-    max-height: 80%;
-    box-shadow: 0 0 4px;
-  }
-  
-  .btn {
-    background: #eeb60c;
-    background-color: #eeb60c;
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
-    border-radius: 4px;
-    font-family: Arial;
-    color: #43455e;
-    font-size: 14px;
-    padding: 8px 20px 8px 20px;
-    text-decoration: none;
-    font-weight: 700;
-  }
-  
-  .btn:hover {
-    background: #af870c;
-    background-color: #af870c;
-    text-decoration: none;
-  }
-  
-  .header {
-    padding: 0.6em;
-    box-shadow: 0 0 4px;
-    height: 32px;
-    background-color: #111827;
-  }
-  
-  input {
-    margin-top: 3px;
-  }
-  
-  #logo {
-    position: fixed;
-    top: 6px;
-    height: 40px;
-    margin-left:20px;
-  }
-  
-  .align-right {
-    float: right;
-  }
-  
-  
+}
+
+.btn {
+  background: #63b863;
+  background-color: #63b863;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #43455e;
+  font-size: 14px;
+  padding: 8px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 5px; /* Added spacing between buttons */
+}
+
+.btn:hover {
+  background: #26ff1e;
+  background-color: #26ff1e;
+  text-decoration: none;
+}
+
+input[type=color] {
+  margin: 5px; /* Added margin for color picker */
+}
+
+.action-buttons {
+  text-align: center;
+  padding-top: 10px; /* Spacing above the buttons */
+}
+
+#logo {
+  position: fixed;
+  top: 6px;
+  height: 40px;
+  margin-left:20px;
+}
+
+.align-right {
+  float: right;
+}
+
+h1, h3 {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333; /* Text color */
+}
+
+h1 {
+  font-size: 28px; /* Adjust the font size */
+  margin-bottom: 20px; /* Add spacing between h1 and h2 */
+}
+
+h3 {
+  font-size: 24px; /* Adjust the font size */
+  margin-top: 20px; /* Add spacing above h3 */
+}
+
+/* New container for tools (color picker, buttons) */
+.tools-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* space between items */
+  padding: 2px;
+}
+
+.tool-item {
+  margin: 5px; /* spacing around each tool item */
+}
