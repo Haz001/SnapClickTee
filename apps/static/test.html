@@ -8,7 +8,7 @@
     </head>
     <body>
 
-        <form action="http://localhost:5000/ai/" method="post">
+        <form action="http://localhost:5000/ai/merge" method="post">
             <div><span>Slot 1</span><br />
             <label for="input1">Type</label><br />
             <input name="input1" type="radio" value="nothing" /> Nothing <br />
@@ -17,7 +17,7 @@
             <label for="string1">URL/Prompt</label><br />
             <input name="string1" type="text" value="https://demo.70e9f1a0f18a49a29a0cd16c9e0750df.lambdaspaces.com/file=/home/demo/source/ex2-3.jpeg"/><br />
             <label for="string1">Strength</label><br />
-            <input type="number" min="0" max="5" step="0.05" name="strength"/>
+            <input type="number" value="1.0" min="0" max="5" step="0.05" name="strength"/>
             <br />
             </div><div><span>Slot 2</span><br />
             <label for="input2">Type</label><br />
@@ -27,7 +27,7 @@
             <label for="string2">URL/Prompt</label><br />
             <input name="string2" type="text" value="https://demo.70e9f1a0f18a49a29a0cd16c9e0750df.lambdaspaces.com/file=/home/demo/source/blonder.jpeg"/><br />
             <label for="string2">Strength</label><br />
-            <input type="number" min="0" max="5" step="0.05" name="strength"/>
+            <input type="number" value="1.0" min="0" max="5" step="0.05" name="strength"/>
             <br />
             </div><div><span>Slot 3</span><br />
             <label for="input3">Type</label><br />
@@ -37,7 +37,7 @@
             <label for="string3">URL/Prompt</label><br />
             <input name="string3" type="text" value="central symmetric figure detailed artwork"/><br />
             <label for="string3">Strength</label><br />
-            <input type="number" min="0" max="5" step="0.05" name="strength"/>
+            <input type="number" value="1.0" min="0" max="5" step="0.05" name="strength"/>
             <br />
 
             </div><div><span>Slot 4</span><br />
@@ -48,7 +48,7 @@
             <label for="string4">URL/Prompt</label><br />
             <input name="string4" type="text"/><br />
             <label for="string4">Strength</label><br />
-            <input type="number" min="0" max="5" step="0.05" name="strength"/>
+            <input type="number" value="1.0" min="0" max="5" step="0.05" name="strength"/>
             <br />
             </div><div><span>Slot 5</span><br />
             <label for="input5">Type</label><br />
@@ -58,7 +58,7 @@
             <label for="string5">URL/Prompt</label><br />
             <input name="string5" type="text"/><br />
             <label for="string5">Strength</label><br />
-            <input type="number" min="0" max="5" step="0.05" name="strength"/>
+            <input type="number" value="1.0" min="0" max="5" step="0.05" name="strength"/>
             </div>
             <br />
             <input type="submit" value="Generate Image">
