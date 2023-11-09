@@ -7,6 +7,10 @@ from io import BytesIO
 import json
 import requests
 
+from flask import Request
+
+from apps import app
+
 client = gradio_client.Client("https://lambdalabs-image-mixer-demo.hf.space/")
 
 
@@ -25,18 +29,26 @@ def single_img():
     data = response["data"]
 
 
-
-
 @dataclasses.dataclass
 class Slot:
     class InputTypes(StrEnum):
         Image = "Image"
         Text = "Text/URL"
         Nothing = "Nothing"
+
     inputType: InputTypes = InputTypes.Nothing
     prompt: str = "Cute Kittens"
     imageUrl: str = "https://placehold.co/1920x1080.png?text=Hello+World&font=roboto"
     strength: float = 1
+
+
+def slot_limit(slots: list[Slot]) -> list[Slot]:
+    if len(slots) < 1:
+        slots.append(Slot(inputType=Slot.InputTypes.Nothing))
+    else:
+        while len(slots) > 5:
+            slots.pop()
+    return slots
 
 
 def image_merge(slot1: Slot, slot2: Slot = Slot(), slot3: Slot = Slot(), slot4=Slot(), slot5=Slot()):
@@ -81,9 +93,48 @@ def image_merge(slot1: Slot, slot2: Slot = Slot(), slot3: Slot = Slot(), slot4=S
     del filepath
     return buf
 
-from PIL import Image
+
+clamp: callable = lambda number, minimum, maximum: max(min(maximum, number), minimum)
 
 
+@app.route("/merge", method="POST")
+def api_image_merge():
+    slots: list[Slot] = list()
+    if Request.is_json:
+        # noinspection PyTypeChecker
+        data: list[dict[str, int | str]] = Request.json
+        for slot_num in clamp(len(data), 0, 5):
+            d_slot: dict[str, int | str] = data[slot_num]
+            slot: Slot = Slot(inputType=Slot.InputTypes.Nothing)
+            if d_slot["type"].lower() == "image":
+                slot.inputType = Slot.InputTypes.Image
+                if "url" in d_slot:
+                    slot.imageUrl = d_slot["url"]
+                else:
+                    return "JSON malformed", 400
+                if "prompt" in d_slot:  # API allows it
+                    slot.prompt = d_slot["prompt"]
+                if "strength" in d_slot:
+                    slot.strength = d_slot["strength"]
+            elif d_slot["type"].lower() == "text":
+                slot.inputType = Slot.InputTypes.Text
+                if "prompt" in d_slot:
+                    slot.prompt = d_slot["prompt"]
+                else:
+                    return "JSON malformed", 400
+                if "url" in d_slot:  # API allows it
+                    slot.imageUrl = d_slot["url"]
+                if "strength" in d_slot:
+                    slot.strength = d_slot["strength"]
+            slots.append(slot)
+    else:
+        # noinspection PyTypeChecker
+        data: dict[str, str] = Request.form
+        for i in range(len(5)):
+            t_slot: Slot = Slot()
+            if (f"input{i}" in data):
+                type = data[f"input{i}"].lower()
+                if type == "image" or type == "text":
 
 
 if __name__ == "__main__":
