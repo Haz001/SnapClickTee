@@ -13,24 +13,28 @@
             </a>
 
             <div class="header-right">
-            <a class="active" href="/ai_merge.html">Ai Merge</a>
+            <a class="active" href="/ai_merge">Ai Merge</a>
             <a href="#Ai Generation">Ai Generation</a>
-            <a href="/index.html">Image Editor</a>
+            <a href="/">Image Editor</a>
             <a href="#Image Bank">Image Bank</a>
         </div>
         </div>
+
         <div class="gallery" id="gallery">
             <img class="gallery-item" src="/static/img/bridge.jpg">
             <img class="gallery-item" src="/static/img/iceberg.jpg">
             <img class="gallery-item" src="/static/img/ivy.jpg">
         </div>
         <div class="content-container">
-            <div class="img-choser">
+
+            <h1>ClickATee</h1>
+
+            <h3>Select Up to 5 images and allow our AI model to merge them into one image for you! </h3>
+
+            <div class="slot">
                 <button onclick="gallery(this.parent.id)">Chose Image</button>
-                <img src="">
-
-
-
+                <button onclick="prompt(this.parent.id)">Use Prompt</button>
+                <img src="https://placehold.co/2048x2048.png" class="uploaded-image">
             </div>
 
 
