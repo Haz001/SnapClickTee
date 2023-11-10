@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/styling.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#default" >
+            <img src="static/image/logo.png" height="50px" width="50px" alt=”site’s logo” alt="website-logo">
+        </a>
+
+        <div class="header-right">
+          <a class="active" href="Merge_design.html">Ai Merge</a>
+          <a href="#Ai Generation">Ai Generation</a>
+          <a href="index.html">Image Editor</a>
+          <a href="#Image Bank">Image Bank</a>
+        </div>
+    </div>
+
+    <h1>ClickATee</h1>
+    <h3>Select Up to 4 images and allow our AI model to merge them into one image for you! </h3>
+
+    <div class="button-container">
+      <!-- Use an input field to enter the image URLs -->
+<input type="text" id="imageUrlInput" placeholder="Enter image URLs separated by commas (up to 4)">
+<button type="button" id="importButton">Import Images</button>
+
+  </div>
+  <div class="image-display">
+      <!-- Image containers -->
+      <div class="image-template">
+        <span class="thumbnail-label">Thumbnail</span>
+        <img id="image1" class="uploaded-image" src="#" alt="Image 1" style="display: none;">
+    </div>
+      <<div class="image-template">
+        <span class="thumbnail-label">Thumbnail</span>
+        <img id="image2" class="uploaded-image" src="#" alt="Image 1" style="display: none;">
+    </div>
+      <div class="image-template">
+        <span class="thumbnail-label">Thumbnail</span>
+        <img id="image3" class="uploaded-image" src="#" alt="Image 1" style="display: none;">
+    </div>
+      <div class="image-template">
+        <span class="thumbnail-label">Thumbnail</span>
+        <img id="image4" class="uploaded-image" src="#" alt="Image 1" style="display: none;">
+    </div>
+  </div>
+  <button type="button" id="mergeButton">Merge Images</button>
+  
+    <script src="ImageMerg.js"></script>
+</body>
+</html>
