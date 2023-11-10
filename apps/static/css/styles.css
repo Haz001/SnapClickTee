@@ -153,9 +153,11 @@ h3 {
 }
 
 .gallery{
+  display: grid;
 
 }
 .gallery-item{
+  display: block;
   height: 100px;
   width: 100px;
 
