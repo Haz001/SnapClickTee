@@ -151,3 +151,58 @@ h3 {
 .tool-item {
   margin: 5px; /* spacing around each tool item */
 }
+
+
+/* Merge image page css */
+
+.uploaded-image {
+  max-width: 100%;
+  height: auto;
+  display: none; 
+}
+
+.image-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-template {
+  background-color: #f0f0f0; /* Gray background color */
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+}
+
+.thumbnail-label {
+  display: block;
+  font-size: 14px;
+  color: #666; /* Gray text color */
+  margin-bottom: 5px;
+}
+
+/* Center the button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px; /* Add margin to separate from other elements if needed */
+}
+
+.file-input-label,
+#mergeButton {
+  background-color: #63b863; /* Button background color */
+  color: #fff; /* Button text color */
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.file-input-label:hover,
+#mergeButton:hover {
+  background-color: #26ff1e; /* Button background color on hover */
+}
