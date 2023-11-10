@@ -151,3 +151,12 @@ h3 {
 .tool-item {
   margin: 5px; /* spacing around each tool item */
 }
+
+.gallery{
+
+}
+.gallery-item{
+  height: 100px;
+  width: 100px;
+
+}

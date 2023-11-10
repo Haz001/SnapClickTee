@@ -18,4 +18,12 @@ def index():
 
     except TemplateNotFound:
         print("404")
-        # return render_template('home/page-404.html'), 404
+        return "Shit is fucked up", 404
+
+@app.route('/ai_merge')
+def merge():
+    try:
+        return render_template('merge.html')
+    except TemplateNotFound:
+        print("404")
+        return "Shit is fucked up", 404
