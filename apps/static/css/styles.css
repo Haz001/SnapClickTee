@@ -206,3 +206,13 @@ h3 {
 #mergeButton:hover {
   background-color: #26ff1e; /* Button background color on hover */
 }
+.gallery{
+  display: grid;
+
+}
+.gallery-item{
+  display: block;
+  height: 100px;
+  width: 100px;
+
+}
