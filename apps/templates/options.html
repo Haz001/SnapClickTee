@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Images</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        {% for item in data %}
+        <h2>{{ item.name }}</h2>
+        <div class="row">
+            {% for color, image_url in item.colours.items() %}
+            <div class="col-md-3">
+                <strong>{{ color }}</strong>
+                <br>
+                <img src="{{ image_url }}" alt="{{ color }}" style="max-width: 300px;">
+                <button class="btn btn-primary select-color" data-color="{{ color }}">Select</button>
+
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    
+</body>
+</html>

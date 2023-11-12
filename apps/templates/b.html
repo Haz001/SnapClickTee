@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://unpkg.com/merge-images"></script>
+</head>
+<body>
+
+  <img src="static/img/neom-hgf0fJGJPQs-unsplash.jpg" id="image_input" style="width: 700px; height: 700px;"/>
+  <a id="buy_button" class="btn align-right" href="#">Buy Now</a>
+  <!-- <div id="qr-code" style="width: 100px; height: 100px;"></div> -->
+
+  <canvas id="qr-code" style="width: 100px; height: 100px;"></canvas>
+  
+<script>
+
+  // Define the button and canvas variables
+  const button = document.getElementById('buy_button');
+  const img = document.getElementById('image_input');
+  const qrCanvas = document.getElementById("qr-code")
+  
+  console.log(button);
+  console.log(img);
+  console.log("test");
+
+    // mergeImages(["static/img/neom-hgf0fJGJPQs-unsplash.jpg", "static/img/neom-V8w0gSmxajY-unsplash.jpg]"])
+    // .then(b64 => document.querySelector('img').src = b64);
+  
+  // Add a click handler to the button
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+     // Generate a QR code
+    const qrCode = new QRCode(qrCanvas, {
+                text: "Your QR Code Data Here", // Replace with your data
+                width: 100,
+                height: 100,
+            });
+
+    // Export the base64 image from the canvas
+    const base64_image = getBase64Image(img);
+
+    const qrCodeImage = new Image();
+    // qrCodeImage.src = getBase64Image(qrCanvas);
+    qrCodeImage.src = qrCanvas.toDataURL('image/png');
+
+    const resultqr = document.createElement('img');
+    resultqr.src = qrCodeImage;
+    document.body.appendChild(resultqr);
+    
+    // You’ll need to replace the API key below with your one, so the checkout has your branding and you get paid. Get your key inside your free teemill.com account. It's ok if the key is in the code as in this context it's a bearer token, and all the endpoint does is use it to return your checkout. If someone scrapes it and uses it in their code, you will just get more money.
+    const apiKey = '7AS5eOnh1QxGdqbYpKIHpwl7ATwIsLzlvtlkC98z'; 
+
+     // Overlay the QR code on the image
+    qrCodeImage.onload = function() {
+      const canvas= document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+      ctx.drawImage(qrCodeImage, img.width - 100, img.height - 100, 100, 100);
+
+      // Convert the merged canvas to base64
+      const base64_mergedImage = canvas.toDataURL('image/png');
+
+      // const base64_mergedImage = getBase64Image(canvas);
+
+      // Set the fields to submit. image_url is the only required field for the API request. If you want, you can set the product name, description and price. You can also change the product type and colours using item_code and colours. To find an up-to-date list of available options for these fields, visit this endpoint: https://teemill.com/omnis/v3/product/options/
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        image_url: base64_mergedImage,
+        item_code: "RNA1",
+        name: "Hello World",
+        colours: "White,Black",
+        description: "Check out this awesome doodle tee, printed on an organic cotton t-shirt sustainably, using renewable energy. Created via the Teemill API and printed on demand.",
+        price: 20.00,
+      }),
+    };
+
+        // Open a new tab, ready to receive the product URL. 
+        var newTab = window.open('about:blank', '_blank');
+    newTab.document.write(
+      "<body style='background-color:#faf9f9;width:100%;height:100%;margin:0;position:relative;'><img src='https://storage.googleapis.com/teemill-dev-image-bucket/doodle2tee_loader.gif' style='position:absolute;top:calc(50% - 100px);left:calc(50% - 100px);'/></body>"
+    );
+  
+    // Send the API request, and redirect the new tab to the URL that is returned
+    fetch('https://teemill.com/omnis/v3/product/create', options)
+      .then(response => response.json())
+      .then(response => newTab.location.href = response.url)
+      .catch(err => console.error(err));
+
+    const resultImage = document.createElement('img');
+      resultImage.src = base64_mergedImage;
+      document.body.appendChild(resultImage);
+
+    };
+
+  });
+  
+
+  function getBase64Image(img) {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    // canvas.width = 1800;
+    // canvas.height = 1800;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+  return canvas.toDataURL('image/png');
+}
+  
+  
+  // Canvas. We're now into drawing, which you may find useful. Either way, you can see that whatever we put on the canvas will go on to the tee. You could use this, extend it or swap it out for your app content, text, images or whatever //
+  
+  // const context = img.getContext('2d');
+  
+  // let color = '#df1aae';
+  
+  // const colorPicker = document.getElementById('color_picker');
+  // colorPicker.addEventListener('input', () => {
+  //   color = colorPicker.value;
+  // })
+  
+  // canvas.width = 1000;
+  // canvas.height = 1300;
+  
+  // var drawingMode = false;
+  // var lastEvent = null;
+  // var lastSize = 0;
+  // var maxSize = 15;
+  // var minSize = 2;
+  
+  // function drawCircle(x, y, radius, color) {
+  //   context.fillStyle = color;
+  //   context.beginPath();
+  //   const canvasRect = canvas.getBoundingClientRect();
+  //   const canvasScale = canvas.width / canvasRect.width;
+  //   context.save();
+  //   context.scale(canvasScale, canvasScale);
+  //   context.arc(
+  //     x - canvasRect.x,
+  //     y - canvasRect.y,
+  //     radius, 0,
+  //     Math.PI * 2,
+  //   );
+  //   context.fill();
+  //   context.closePath();
+  //   context.restore();
+  // }
+  
+  // function onMouseDown(e) {
+  //   if (e.touches) {
+  //     e = e.touches[0];
+  //   }
+  
+  //   lastEvent = e;
+  //   drawingMode = true;
+  //   document.getElementById('initial_message').classList.add('hidden');
+  // }
+  
+  // function onMouseUp() {
+  //   drawingMode = false;
+  // }
+  
+  // function onMouseMove(e) {
+  //   if (!drawingMode) {
+  //     return;
+  //   }
+  //   if (e.touches) {
+  //     e.preventDefault();
+  //     e = e.touches[0];
+  //   }
+  //   let size = 1;
+    
+  //   // calculate the distance between the points and scale the size of the new circle based on that distance
+  //   const deltaX = e.pageX - lastEvent.pageX;
+  //   const deltaY = e.pageY - lastEvent.pageY;
+  //   const distanceToLastMousePosition = Math.sqrt(
+  //     (deltaX ** 2) +
+  //     (deltaY ** 2)
+  //   );
+  
+  //   size = Math.max(minSize, Math.min(maxSize, distanceToLastMousePosition / 3));
+    
+  //   if (drawingMode) {
+  //     drawCircle(e.pageX, e.pageY, size, color);
+  //   }
+    
+  //   if (lastSize) {
+  //     const deltaSize = size - lastSize;
+      
+  //     for (let i = 0; i < distanceToLastMousePosition; i += 1) {
+  //       const shift = (i / distanceToLastMousePosition);
+  //       // draw circles between our new mouse position and our previous one, to smooth the line out
+  //       drawCircle(
+  //         e.pageX - (deltaX * shift),
+  //         e.pageY - (deltaY * shift),
+  //         size - (deltaSize * shift),
+  //         color
+  //       );
+  //     }
+  //   }
+  
+  //   lastEvent = e;
+  //   lastSize = size;
+  // }
+  
+  // canvas.addEventListener('mousedown', onMouseDown);
+  // canvas.addEventListener('touchstart', onMouseDown);
+  
+  // canvas.addEventListener('mousemove', onMouseMove);
+  // canvas.addEventListener('touchmove', onMouseMove);
+  
+  // window.addEventListener('mouseup', onMouseUp);
+  // window.addEventListener('touchend', onMouseUp);
+  </script>
+
+</body>
+</html>
